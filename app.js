@@ -1,5 +1,7 @@
+import dotenv from "dotenv";
 import { createServer } from 'http';
 import fetch from 'node-fetch';
+dotenv.config();
 
 const appServer = createServer((req, res) => {
     if (req.url === "/asteroids"){
@@ -27,11 +29,7 @@ const appServer = createServer((req, res) => {
 
 
 
-const config = {
-    hostname: "127.6.16.15",
-    port:4000
-};
-
-appServer.listen(config,()=>{
-    console.log(`Server running at http://${config.hostname}:${config.port}/`)
+let config = JSON.parse(process.env.MY_CONFIG);
+appServer.listen(config, ()=>{
+    console.log(`http://${config.hostname}:${config.port}`);
 });
